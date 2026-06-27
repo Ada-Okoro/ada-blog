@@ -34,7 +34,11 @@ git add -A
 if git diff --cached --quiet; then
   echo "[publish] 无变化,跳过提交"
 else
-  git -c user.name="ShepherdLoveYou" -c user.email="yunfansong0@gmail.com" \
+  # 提交身份沿用本仓库的 git 配置(客户在自己机器上即用自己的身份);
+  # 未配置时用中性身份兜底,保证脚本不报错。
+  AUTHOR_NAME="$(git config user.name || echo 'blog-publisher')"
+  AUTHOR_EMAIL="$(git config user.email || echo 'blog-publisher@localhost')"
+  git -c user.name="$AUTHOR_NAME" -c user.email="$AUTHOR_EMAIL" \
       commit -q -m "publish static site"
 fi
 # 优先 --force-with-lease(不盲目覆盖他人改动);分支首次不存在时回退到 --force

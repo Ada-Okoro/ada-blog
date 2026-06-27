@@ -72,31 +72,14 @@ python3 -m http.server -d static 8080   # 打开 http://localhost:8080
 
 ## 5. 部署到 GitHub Pages
 
-### 5.1 选定对外地址(`PAGES_URL`)
-编辑 `.env` 里的 `PAGES_URL` 为最终对外完整地址,三选一:
+> **交付场景**:本项目是给客户做的,客户在**自己账号**下发布。完整、账号无关的步骤(含网页版开 Pages)见 **[DEPLOY.md](DEPLOY.md)**。下面是命令行速查。
 
-| 形态 | 仓库名 | `PAGES_URL` 示例 | 子路径 |
-|---|---|---|---|
-| 项目站 | 任意(如 `ada-blog`) | `https://shepherdloveyou.github.io/ada-blog` | 自动加 `--subDir` |
-| 用户站 | `shepherdloveyou.github.io` | `https://shepherdloveyou.github.io` | 无 |
-| 自定义域名 | 任意 | `https://blog.example.com`(并设 `PAGES_CNAME=blog.example.com`) | 无 |
+1. `.env` 把 `PAGES_URL` 设为 `https://<USER>.github.io/<REPO>`(`<USER>` = 客户 GitHub 用户名)。
+2. 用客户自己的账号建仓 + 推源码:`gh repo create <REPO> --public --source=. --remote=origin --push`
+3. 生成并发布:`./scripts/publish-pages.sh`
+4. 开 Pages(只需一次):`gh api -X POST repos/<USER>/<REPO>/pages -f 'source[branch]=gh-pages' -f 'source[path]=/'`(或仓库 Settings → Pages → 选 `gh-pages` / `/(root)`)。
 
-### 5.2 建仓库 + 首次发布
-```bash
-# 1) 建 GitHub 仓库并推送源码(Pages 免费公开站需 public)
-gh repo create ada-blog --public --source=. --remote=origin --push
-
-# 2) 生成静态站并推到 gh-pages 分支
-./scripts/publish-pages.sh
-
-# 3) 让 Pages 从 gh-pages 分支根目录提供服务
-gh api -X POST repos/ShepherdLoveYou/ada-blog/pages \
-  -f 'source[branch]=gh-pages' -f 'source[path]=/'
-```
-几分钟后访问 `PAGES_URL` 即可。**自定义域名**:在仓库 Settings → Pages 填好域名(或靠 `.env` 的 `PAGES_CNAME` 自动写 CNAME),并把 DNS 指向 GitHub Pages。
-
-### 5.3 发新文章的循环
-本地后台写好 → `./scripts/publish-pages.sh` → 线上自动更新。
+发新文章循环:本地后台写好 → `./scripts/publish-pages.sh` → 线上自动更新。
 
 ---
 
