@@ -1,64 +1,79 @@
-/* ===== Ada's blog 自定义(注入到 Ghost code injection head)=====
-   {{AVATAR_URL}} 由 scripts/personalize.py 在上传头像后替换。 */
+/* ===== Qian Li · Data & Business Analyst — 编辑/极简 ===== */
+:root {
+  --accent:#0ABAB5; --ink:#1a1a1a; --muted:#5b6470; --faint:#9aa0a6;
+  --line:#ececea; --bg:#fafaf9;
+}
 
-/* 1) 隐藏所有会员/订阅 UI(会员功能也已在设置里关闭,双保险) */
-.gh-footer-signup,
-.gh-navigation-members,
-.nav-sign-up,
-form[data-members-form] { display: none !important; }
+/* 0) 底色:中性暖白(移除旧的满屏蓝/白卡那套) */
+body { background: var(--bg); color: var(--ink); }
+.gh-viewport { background: transparent; max-width: none; margin: 0; border-radius: 0; box-shadow: none; width: auto; }
+.gh-inner, .gh-viewport .gh-inner { max-width: 880px; }
 
-/* 1b) 静态站没有 Ghost 后端:隐藏依赖实时 API 的功能(评论会一直转圈、搜索点了无效) */
-.gh-comments,
-.gh-search { display: none !important; }
-
-/* 2) 首页默认封面大区块由自定义 hero 取代,隐藏它 */
+/* 1) 隐藏会员/订阅 + 静态站无效功能 */
+.gh-footer-signup, .gh-navigation-members, .nav-sign-up,
+form[data-members-form], .gh-comments, .gh-search { display: none !important; }
 body.home-template .gh-header { display: none !important; }
 
-/* 3) 导航栏站名前的小圆头像(站内每页都在) */
+/* 2) 顶栏头像(Tiffany 细描边,克制) */
 .gh-navigation-logo.is-title { display: inline-flex; align-items: center; gap: 10px; }
 .gh-navigation-logo.is-title::before {
-  content: ""; width: 38px; height: 38px; border-radius: 50%;
+  content: ""; width: 30px; height: 30px; border-radius: 50%;
   background: url("{{AVATAR_URL}}") center/cover no-repeat; flex: none;
-  border: 2px solid #0ABAB5; /* Tiffany Blue */
+  border: 1.5px solid var(--accent);
 }
 
-/* 4) 自定义 hero(由 blog.js 在首页生成):方向 C 横向布局 */
-.ada-hero { padding: 32px 0 8px; }
-.ada-hero__inner { display: flex; gap: 18px; align-items: center; }
-.ada-hero__avatar {
-  width: 88px; height: 88px; border-radius: 50%; object-fit: cover;
-  border: 3px solid #0ABAB5; flex: none; /* Tiffany Blue */
-}
-.ada-hero__name { margin: 0; font-size: 1.6rem; line-height: 1.2; font-weight: 700; }
-.ada-hero__bio  { margin: .4rem 0 .75rem; color: #5b6470; font-size: .98rem; max-width: 62ch; }
-.ada-hero__links a {
-  display: inline-flex; align-items: center; padding: 6px 15px; border-radius: 7px;
-  color: #fff !important; font-weight: 600; font-size: .85rem; text-decoration: none; margin-right: 8px;
-}
-.ada-hero__links a.gh { background: #24292f; }
-.ada-hero__links a.li { background: #0a66c2; }
+/* 3) Tiffany 作点缀:仅内容链接用强调色;标题/导航/卡片保持墨色,hover 才变蓝 */
+a { color: var(--accent); }
+.gh-navigation a { color: var(--ink); }
+.gh-navigation a:hover { color: var(--accent); }
+.gh-card-link, .gh-card-title, .gh-card-title a { color: var(--ink); }
+.gh-card:hover .gh-card-title { color: var(--accent); }
+
+/* 4) Hero(blog.js 生成) */
+.ada-hero { max-width: 880px; margin: 42px auto 6px; padding: 0 24px; }
+.ada-hero__eyebrow { font-size: .75rem; letter-spacing: .12em; font-weight: 700; color: var(--accent); text-transform: uppercase; }
+.ada-hero__title { font-size: 2.1rem; font-weight: 800; line-height: 1.15; margin: .4rem 0 .5rem; }
+.ada-hero__bio { font-size: 1.05rem; color: var(--muted); max-width: 62ch; line-height: 1.55; margin: 0 0 1.1rem; }
+.ada-hero__links a { display: inline-flex; align-items: center; padding: 8px 16px; border-radius: 8px;
+  font-size: .85rem; font-weight: 600; text-decoration: none; margin-right: 8px;
+  border: 1px solid #d8dcda; color: var(--muted); }
+.ada-hero__links a.primary { border-color: var(--accent); color: var(--accent); }
+
+/* 5) 区块标签 */
+.ada-section-label { max-width: 880px; margin: 34px auto 0; padding: 0 24px 8px;
+  font-size: .72rem; letter-spacing: .12em; font-weight: 700; color: var(--faint);
+  text-transform: uppercase; border-bottom: 1px solid var(--line); }
+
+/* 6) SELECTED WORK — 卡片网格 */
+.ada-work { max-width: 880px; margin: 16px auto 0; padding: 0 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.ada-work .gh-card { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; margin: 0; }
+.ada-work .gh-card-image, .ada-work .gh-card-link { display: block; }
+.ada-work .gh-card-image img, .ada-work .gh-card img { width: 100%; height: 152px; object-fit: cover; display: block; }
+.ada-work .gh-card-content, .ada-work .gh-card-wrapper { padding: 14px; }
+.ada-work .gh-card-title { font-size: 1.05rem; line-height: 1.3; margin: 0 0 .35rem; }
+.ada-work .gh-card-excerpt { font-size: .9rem; color: var(--muted); line-height: 1.45; }
+
+/* 7) WRITING — 列表 */
+.ada-writing { max-width: 880px; margin: 6px auto 0; padding: 0 24px; }
+.ada-writing .gh-card { border: 0; border-bottom: 1px solid #f1f1ef; border-radius: 0; padding: 16px 0; margin: 0; background: transparent; }
+.ada-writing .gh-card-image { display: none; }
+.ada-writing .gh-card-title { font-size: 1.1rem; margin: 0 0 .3rem; }
+.ada-writing .gh-card-excerpt { font-size: .92rem; color: var(--muted); }
+
+/* 8) 文章 / 页面正文阅读宽 */
+.gh-content, .post-content, .gh-article .gh-content { max-width: 680px; margin-left: auto; margin-right: auto; }
+.gh-article-title, .article-title, .gh-article-header .gh-article-title { line-height: 1.2; }
+
+/* 9) 文章配图 */
+figure.kg-image-card img { border-radius: 8px; border: 1px solid var(--line); }
+figure.kg-image-card figcaption { font-size: .82rem; color: var(--faint); text-align: center; margin-top: 6px; }
+
+/* 10) 页脚 */
+.ada-foot { margin-top: 10px; font-size: .85rem; color: var(--faint); }
+.ada-foot a { color: var(--accent); text-decoration: none; }
+
 @media (max-width: 640px) {
-  .ada-hero__inner { flex-direction: column; text-align: center; }
-  .ada-hero__bio { margin-left: auto; margin-right: auto; }
+  .ada-work { grid-template-columns: 1fr; }
+  .ada-hero__title { font-size: 1.7rem; }
 }
-
-/* 5) 页脚版权 + 社交 */
-.ada-foot { margin-top: 10px; font-size: .85rem; color: #8a929c; }
-.ada-foot a { color: #8a929c; text-decoration: underline; }
-
-/* 6) 文章配图与说明 */
-figure.kg-image-card img { border-radius: 8px; border: 1px solid rgba(0,0,0,.06); }
-figure.kg-image-card figcaption { font-size: .82rem; color: #8a929c; text-align: center; margin-top: 6px; }
-
-/* 7) Tiffany Blue 页面背景 + 白色内容卡(礼盒观感,正文仍在白底上) */
-body { background: #0ABAB5; }
-.gh-viewport {
-  background: #fff;
-  width: calc(100% - 36px);
-  max-width: 1100px;
-  margin: 26px auto;
-  border-radius: 16px;
-  box-shadow: 0 14px 50px rgba(0,0,0,.20);
-  padding-bottom: 10px;
-}
-.gh-viewport .gh-inner { max-width: 940px; }
