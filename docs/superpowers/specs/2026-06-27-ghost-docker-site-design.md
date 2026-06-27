@@ -16,6 +16,7 @@
 | 维度 | 决策 | 理由 |
 |---|---|---|
 | 运行方式 | Docker Compose:Ghost + MySQL 各一容器 | Node 应用的标准隔离方式 |
+| Ghost 版本 | `ghost:6`(debian/bookworm,当前 6.47.0) | v6 为当前稳定大版本;debian 镜像 native 模块(图片处理 sharp 等)最稳 |
 | 「虚拟环境」含义 | Ghost 的隔离 = Docker 容器;另设独立 Python venv 仅跑运维脚本 | Ghost 本体不需要 Python venv;脚本侧贴合用户 uv/Miniforge 习惯 |
 | 数据库 | MySQL 8.0 | Ghost 官方生产推荐(非 SQLite) |
 | 部署形态 | 本机优先,预留上线能力(Caddy 反代放 `online` profile) | 一套仓库从本地长到生产 |
@@ -27,7 +28,7 @@
 
 ## 3. 架构与组件
 
-- **`ghost` 容器** — 官方 `ghost` 镜像,锁定 5.x 最新稳定版(实现时核对确切 tag)。`NODE_ENV=production`,连 `db`。本地仅映射到 `127.0.0.1:2368`,不暴露公网。`depends_on` db 健康后启动。
+- **`ghost` 容器** — 官方 `ghost:6` 镜像(debian/bookworm,当前 6.47.0)。`NODE_ENV=production`,连 `db`。本地仅映射到 `127.0.0.1:2368`,不暴露公网。`depends_on` db 健康后启动。
 - **`db` 容器** — `mysql:8.0`。独立数据卷 + healthcheck。
 - **`caddy` 容器(profile: `online`,本地不跑)** — 上线时反代 Ghost,自动 HTTPS。
 
