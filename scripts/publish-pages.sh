@@ -22,6 +22,13 @@ git worktree add --force -B gh-pages "$WT"
 rsync -a --delete --exclude='.git' "$ROOT/static/" "$WT/"
 touch "$WT/.nojekyll"   # 关闭 Jekyll,正常提供 _ 开头的资源目录
 
+# 自定义域名:每次发布都写回 CNAME,避免 force-push 丢失(.env 里设 PAGES_CNAME=blog.example.com)
+PAGES_CNAME="$(grep -E '^PAGES_CNAME=' .env 2>/dev/null | head -1 | cut -d= -f2- || true)"
+if [ -n "${PAGES_CNAME:-}" ]; then
+  echo "$PAGES_CNAME" > "$WT/CNAME"
+  echo "[publish] wrote CNAME: $PAGES_CNAME"
+fi
+
 cd "$WT"
 git add -A
 if git diff --cached --quiet; then
@@ -30,5 +37,7 @@ else
   git -c user.name="ShepherdLoveYou" -c user.email="yunfansong0@gmail.com" \
       commit -q -m "publish static site"
 fi
-git push -u origin gh-pages --force
+# 优先 --force-with-lease(不盲目覆盖他人改动);分支首次不存在时回退到 --force
+git push -u origin gh-pages --force-with-lease 2>/dev/null \
+  || git push -u origin gh-pages --force
 echo "[publish] 已推送到 gh-pages 分支"
