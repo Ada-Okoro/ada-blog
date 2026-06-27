@@ -17,3 +17,6 @@
 __pycache__/
 *.pyc
 *.egg-info/
+
+# brainstorming visual companion
+/.superpowers/
