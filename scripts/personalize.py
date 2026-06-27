@@ -11,14 +11,15 @@ BASE = "http://localhost:2368/ghost/api/admin"
 ORIGIN = "http://localhost:2368"
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-NAME = "Ada Business Analyst"          # 站点标题(导航栏)
-HERO_NAME = "Qian Li (Ada)"            # hero 里显示的个人名字
+NAME = "Qian Li · Data & Business Analyst"   # 站点标题
+HERO_NAME = "Qian Li (Ada)"                   # hero 里显示的个人名字
 GITHUB_URL = "https://github.com/Ada-Okoro"
 LINKEDIN_URL = "https://www.linkedin.com/in/qianli-cv/"
-BIO = ("PMP-certified business & data analyst in Calgary. "
-       "Data-driven decisions · SQL · Power BI · Tableau.")
+BIO = ("PMP-certified analyst with 6+ years in business analysis & data analytics — "
+       "helping teams make data-driven decisions. SQL · Power BI · Tableau.")
 NAV = [
-    {"label": "Home", "url": "/"},
+    {"label": "Work", "url": "/"},
+    {"label": "Writing", "url": "/#writing"},
     {"label": "About", "url": "/about/"},
 ]
 ABOUT_HTML = (
@@ -102,6 +103,7 @@ def main() -> int:
     code_foot = f"<script>\n{js}\n</script>"
 
     settings = [
+        {"key": "title", "value": NAME},
         {"key": "members_signup_access", "value": "none"},
         {"key": "portal_button", "value": False},
         {"key": "accent_color", "value": "#0ABAB5"},  # Tiffany Blue
