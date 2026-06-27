@@ -104,6 +104,7 @@ def main() -> int:
     settings = [
         {"key": "members_signup_access", "value": "none"},
         {"key": "portal_button", "value": False},
+        {"key": "accent_color", "value": "#0ABAB5"},  # Tiffany Blue
         {"key": "description", "value": BIO},
         {"key": "icon", "value": avatar_url},
         {"key": "navigation", "value": json.dumps(NAV)},

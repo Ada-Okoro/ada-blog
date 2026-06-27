@@ -19,7 +19,7 @@ body.home-template .gh-header { display: none !important; }
 .gh-navigation-logo.is-title::before {
   content: ""; width: 38px; height: 38px; border-radius: 50%;
   background: url("{{AVATAR_URL}}") center/cover no-repeat; flex: none;
-  border: 2px solid rgba(0,0,0,.06);
+  border: 2px solid #0ABAB5; /* Tiffany Blue */
 }
 
 /* 4) 自定义 hero(由 blog.js 在首页生成):方向 C 横向布局 */
@@ -27,7 +27,7 @@ body.home-template .gh-header { display: none !important; }
 .ada-hero__inner { display: flex; gap: 18px; align-items: center; }
 .ada-hero__avatar {
   width: 88px; height: 88px; border-radius: 50%; object-fit: cover;
-  border: 3px solid rgba(0,0,0,.06); flex: none;
+  border: 3px solid #0ABAB5; flex: none; /* Tiffany Blue */
 }
 .ada-hero__name { margin: 0; font-size: 1.6rem; line-height: 1.2; font-weight: 700; }
 .ada-hero__bio  { margin: .4rem 0 .75rem; color: #5b6470; font-size: .98rem; max-width: 62ch; }
