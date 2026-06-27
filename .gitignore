@@ -9,6 +9,9 @@
 /backups/*
 !/backups/.gitkeep
 
+# generated static site (lives on gh-pages branch, not main)
+/static/
+
 # ops python venv
 /.ops-venv/
 __pycache__/

@@ -44,25 +44,21 @@ services:
     ports:
       - "127.0.0.1:2368:2368"
 
-  caddy:
-    image: caddy:2
-    container_name: ghost-caddy
-    restart: unless-stopped
-    profiles: ["online"]
+  # 一次性静态导出器(profile: generate,平时不启动)。
+  # 共享 ghost 的网络命名空间,因此容器内 localhost:2368 即 Ghost 本体,
+  # 与 Ghost 的 url(http://localhost:2368)一致,gssg 才能正确改写链接。
+  generate:
+    build: ./tools/gssg
+    image: ghost-site-gssg
+    profiles: ["generate"]
+    network_mode: "service:ghost"
     depends_on:
       - ghost
     environment:
-      DOMAIN: ${DOMAIN}
-      ACME_EMAIL: ${ACME_EMAIL}
-    ports:
-      - "80:80"
-      - "443:443"
+      PAGES_URL: ${PAGES_URL}
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy-data:/data
-      - caddy-config:/config
+      - ./static:/site/static
+    restart: "no"
 
 volumes:
   db-data:
-  caddy-data:
-  caddy-config:
