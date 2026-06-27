@@ -27,4 +27,24 @@ fi
 
 echo "[generate] building + running gssg -> ./static ..."
 docker compose --profile generate run --rm --build generate gssg "${args[@]}"
+
+# gssg 只抓取被引用的尺寸版本;og:image 等指向原图,这里用最大尺寸补齐缺失的原图
+python3 - <<'PY'
+import pathlib, re, shutil
+base = pathlib.Path("static/content/images"); sized = base / "size"
+if sized.exists():
+    best = {}
+    for f in sized.rglob("*"):
+        if not f.is_file():
+            continue
+        parts = f.relative_to(sized).parts            # (wXXX[hYYY], 2026, 06, file)
+        orig = base.joinpath(*parts[1:])
+        m = re.search(r"w(\d+)", parts[0]); w = int(m.group(1)) if m else 0
+        if orig not in best or w > best[orig][0]:
+            best[orig] = (w, f)
+    for orig, (w, f) in best.items():
+        if not orig.exists():
+            orig.parent.mkdir(parents=True, exist_ok=True); shutil.copy(f, orig)
+            print(f"[fill original] {orig.relative_to('static')}")
+PY
 echo "[generate] done -> ./static"

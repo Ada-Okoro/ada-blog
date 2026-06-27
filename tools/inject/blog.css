@@ -41,3 +41,11 @@ body.home-template .gh-header { display: none !important; }
   .ada-hero__inner { flex-direction: column; text-align: center; }
   .ada-hero__bio { margin-left: auto; margin-right: auto; }
 }
+
+/* 5) 页脚版权 + 社交 */
+.ada-foot { margin-top: 10px; font-size: .85rem; color: #8a929c; }
+.ada-foot a { color: #8a929c; text-decoration: underline; }
+
+/* 6) 文章配图与说明 */
+figure.kg-image-card img { border-radius: 8px; border: 1px solid rgba(0,0,0,.06); }
+figure.kg-image-card figcaption { font-size: .82rem; color: #8a929c; text-align: center; margin-top: 6px; }

@@ -14,6 +14,18 @@
     document.querySelectorAll(".gh-footer-signup,.gh-navigation-members,form[data-members-form]")
       .forEach(function (e) { e.remove(); });
 
+    // 页脚加版权 + 社交(所有页面)
+    var foot = document.querySelector(".gh-footer .gh-inner") || document.querySelector(".gh-footer");
+    if (foot && !foot.querySelector(".ada-foot")) {
+      var yr = new Date().getFullYear();
+      var note = document.createElement("div");
+      note.className = "ada-foot";
+      note.innerHTML = "© " + yr + " Qian Li (Ada) · " +
+        '<a href="' + GH + '" target="_blank" rel="noopener">GitHub</a> · ' +
+        '<a href="' + LI + '" target="_blank" rel="noopener">LinkedIn</a>';
+      foot.appendChild(note);
+    }
+
     if (!isHome() || document.querySelector(".ada-hero")) return;
 
     var hero = document.createElement("section");
