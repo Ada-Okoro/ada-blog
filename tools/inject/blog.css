@@ -29,6 +29,9 @@ a { color: var(--accent); }
 .gh-card-link, .gh-card-title, .gh-card-title a { color: var(--ink); }
 .gh-card:hover .gh-card-title { color: var(--accent); }
 
+/* 注入区块在 flex 列父级下需 width:100% 才能统一撑满再居中(否则缩成内容宽) */
+.ada-hero, .ada-section-label, .ada-work, .ada-writing { width: 100%; box-sizing: border-box; }
+
 /* 4) Hero(blog.js 生成) */
 .ada-hero { max-width: 880px; margin: 42px auto 6px; padding: 0 24px; }
 .ada-hero__eyebrow { font-size: .75rem; letter-spacing: .12em; font-weight: 700; color: var(--accent); text-transform: uppercase; }
