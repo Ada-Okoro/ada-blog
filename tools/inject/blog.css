@@ -7,6 +7,10 @@
 .nav-sign-up,
 form[data-members-form] { display: none !important; }
 
+/* 1b) 静态站没有 Ghost 后端:隐藏依赖实时 API 的功能(评论会一直转圈、搜索点了无效) */
+.gh-comments,
+.gh-search { display: none !important; }
+
 /* 2) 首页默认封面大区块由自定义 hero 取代,隐藏它 */
 body.home-template .gh-header { display: none !important; }
 
