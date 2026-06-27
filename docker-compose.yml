@@ -1,0 +1,68 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: ghost-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+
+  ghost:
+    image: ghost:6
+    container_name: ghost-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      database__client: mysql
+      database__connection__host: db
+      database__connection__port: "3306"
+      database__connection__user: ${MYSQL_USER}
+      database__connection__password: ${MYSQL_PASSWORD}
+      database__connection__database: ${MYSQL_DATABASE}
+      url: ${GHOST_URL}
+      # ----- Mail (reserved, not enabled) -----
+      # 取消注释并在 .env 填 MAIL_USER / MAIL_PASS 即可启用 newsletter/会员邮件
+      # mail__transport: SMTP
+      # mail__options__service: Mailgun
+      # mail__options__auth__user: ${MAIL_USER}
+      # mail__options__auth__pass: ${MAIL_PASS}
+    volumes:
+      - ./content:/var/lib/ghost/content
+    ports:
+      - "127.0.0.1:2368:2368"
+
+  caddy:
+    image: caddy:2
+    container_name: ghost-caddy
+    restart: unless-stopped
+    profiles: ["online"]
+    depends_on:
+      - ghost
+    environment:
+      DOMAIN: ${DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  db-data:
+  caddy-data:
+  caddy-config:
