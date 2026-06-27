@@ -1,6 +1,0 @@
-[project]
-name = "ghost-site-ops"
-version = "0.1.0"
-description = "Ops scripts for ghost-site (backup)"
-requires-python = ">=3.10"
-dependencies = []

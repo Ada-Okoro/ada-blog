@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Does Weather Drive Retail Sales? Climate–Sales Correlation across AB, BC &amp; ON (2013–2022)</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preload" as="style" href="./../assets/built/screen.css?v=39fb1568b4">
+    <link rel="preload" as="script" href="./../assets/built/source.js?v=39fb1568b4">
+    
+    <link rel="preload" as="font" type="font/woff2" href="./../assets/fonts/inter-roman.woff2?v=39fb1568b4" crossorigin="anonymous">
+<style>
+    @font-face {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: optional;
+        src: url(./../assets/fonts/inter-roman.woff2?v=39fb1568b4) format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+</style>
+
+    <link rel="stylesheet" type="text/css" href="./../assets/built/screen.css?v=39fb1568b4">
+
+    <style>
+        :root {
+            --background-color: #ffffff
+        }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast has been taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+
+        if (accentColor.length === 3) {
+            accentColor = accentColor[0] + accentColor[0] + accentColor[1] + accentColor[1] + accentColor[2] + accentColor[2];
+        }
+
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    <meta name="description" content="A decade of data on how temperature and precipitation relate to retail sales — and what it means for forecasting.">
+    <link rel="icon" href="https://ada-okoro.github.io/ada-blog/content/images/size/w256h256/2026/06/avatar-10.png" type="image/png">
+    <link rel="canonical" href="https://ada-okoro.github.io/ada-blog/weather-retail-sales/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Qian Li · Data &amp; Business Analyst">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Does Weather Drive Retail Sales? Climate–Sales Correlation across AB, BC &amp; ON (2013–2022)">
+    <meta property="og:description" content="A decade of data on how temperature and precipitation relate to retail sales — and what it means for forecasting.">
+    <meta property="og:url" content="https://ada-okoro.github.io/ada-blog/weather-retail-sales/">
+    <meta property="og:image" content="https://ada-okoro.github.io/ada-blog/content/images/2026/06/dashboard-correlation-ab-1.png">
+    <meta property="article:published_time" content="2026-06-27T20:54:30.000Z">
+    <meta property="article:modified_time" content="2026-06-27T21:48:47.000Z">
+    <meta property="article:tag" content="Data Analytics">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Does Weather Drive Retail Sales? Climate–Sales Correlation across AB, BC &amp; ON (2013–2022)">
+    <meta name="twitter:description" content="A decade of data on how temperature and precipitation relate to retail sales — and what it means for forecasting.">
+    <meta name="twitter:url" content="https://ada-okoro.github.io/ada-blog/weather-retail-sales/">
+    <meta name="twitter:image" content="https://ada-okoro.github.io/ada-blog/content/images/2026/06/dashboard-correlation-ab-1.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Ada Okoro">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Data Analytics">
+    <meta property="og:image:width" content="1006">
+    <meta property="og:image:height" content="793">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qian Li · Data &amp; Business Analyst",
+        "url": "https://ada-okoro.github.io/ada-blog/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://ada-okoro.github.io/ada-blog/content/images/size/w256h256/2026/06/avatar-10.png"
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Ada Okoro",
+        "url": "https://ada-okoro.github.io/ada-blog/author/ada/",
+        "sameAs": []
+    },
+    "headline": "Does Weather Drive Retail Sales? Climate–Sales Correlation across AB, BC &amp; ON (2013–2022)",
+    "url": "https://ada-okoro.github.io/ada-blog/weather-retail-sales/",
+    "datePublished": "2026-06-27T20:54:30.000Z",
+    "dateModified": "2026-06-27T21:48:47.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://ada-okoro.github.io/ada-blog/content/images/2026/06/dashboard-correlation-ab-1.png",
+        "width": 1006,
+        "height": 793
+    },
+    "keywords": "Data Analytics",
+    "description": "A decade of data on how temperature and precipitation relate to retail sales — and what it means for forecasting.",
+    "mainEntityOfPage": "https://ada-okoro.github.io/ada-blog/weather-retail-sales/"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 6.47">
+    <link rel="alternate" type="application/rss+xml" title="Qian Li · Data &amp; Business Analyst" href="https://ada-okoro.github.io/ada-blog/rss/">
+    
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.8/umd/sodo-search.min.js" data-key="c365eb55b5ca3a11bc2bf6973a" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.8/umd/main.css" data-sodo-search="https://ada-okoro.github.io/ada-blog/" data-locale="en" crossorigin="anonymous"></script>
+    
+    <link href="https://ada-okoro.github.io/ada-blog/webmentions/receive/" rel="webmention">
+    <script defer src="./../public/cards.min.js?v=39fb1568b4"></script>
+    <link rel="stylesheet" type="text/css" href="./../public/cards.min.css?v=39fb1568b4">
+    <script defer src="./../public/comment-counts.min.js?v=39fb1568b4" data-ghost-comments-counts-api="https://ada-okoro.github.io/ada-blog/members/api/comments/counts/"></script><style>:root {--ghost-accent-color: #0ABAB5;}</style>
+    <style>
+/* ===== Qian Li · Data & Business Analyst — 编辑/极简 ===== */
+:root {
+  --accent:#0ABAB5; --ink:#1a1a1a; --muted:#5b6470; --faint:#9aa0a6;
+  --line:#ececea; --bg:#fafaf9;
+}
+
+/* 0) 底色:中性暖白(移除旧的满屏蓝/白卡那套) */
+body { background: var(--bg); color: var(--ink); }
+.gh-viewport { background: transparent; max-width: none; margin: 0; border-radius: 0; box-shadow: none; width: auto; }
+.gh-inner, .gh-viewport .gh-inner { max-width: 880px; }
+
+/* 1) 隐藏会员/订阅 + 静态站无效功能 */
+.gh-footer-signup, .gh-navigation-members, .nav-sign-up,
+form[data-members-form], .gh-comments, .gh-search { display: none !important; }
+body.home-template .gh-header { display: none !important; }
+
+/* 2) 顶栏头像(Tiffany 细描边,克制) */
+.gh-navigation-logo.is-title { display: inline-flex; align-items: center; gap: 10px; }
+.gh-navigation-logo.is-title::before {
+  content: ""; width: 30px; height: 30px; border-radius: 50%;
+  background: url("https://ada-okoro.github.io/ada-blog/content/images/2026/06/avatar-10.png") center/cover no-repeat; flex: none;
+  border: 1.5px solid var(--accent);
+}
+
+/* 3) Tiffany 作点缀:仅内容链接用强调色;标题/导航/卡片保持墨色,hover 才变蓝 */
+a { color: var(--accent); }
+.gh-navigation a { color: var(--ink); }
+.gh-navigation a:hover { color: var(--accent); }
+.gh-card-link, .gh-card-title, .gh-card-title a { color: var(--ink); }
+.gh-card:hover .gh-card-title { color: var(--accent); }
+
+/* 注入区块在 flex 列父级下需 width:100% 才能统一撑满再居中(否则缩成内容宽) */
+.ada-hero, .ada-section-label, .ada-work, .ada-writing { width: 100%; box-sizing: border-box; }
+
+/* 4) Hero(blog.js 生成) */
+.ada-hero { max-width: 880px; margin: 42px auto 6px; padding: 0 24px; }
+.ada-hero__eyebrow { font-size: .75rem; letter-spacing: .12em; font-weight: 700; color: var(--accent); text-transform: uppercase; }
+.ada-hero__title { font-size: 2.1rem; font-weight: 800; line-height: 1.15; margin: .4rem 0 .5rem; }
+.ada-hero__bio { font-size: 1.05rem; color: var(--muted); max-width: 62ch; line-height: 1.55; margin: 0 0 1.1rem; }
+.ada-hero__links a { display: inline-flex; align-items: center; padding: 8px 16px; border-radius: 8px;
+  font-size: .85rem; font-weight: 600; text-decoration: none; margin-right: 8px;
+  border: 1px solid #d8dcda; color: var(--muted); }
+.ada-hero__links a.primary { border-color: var(--accent); color: var(--accent); }
+
+/* 5) 区块标签 */
+.ada-section-label { max-width: 880px; margin: 34px auto 0; padding: 0 24px 8px;
+  font-size: .72rem; letter-spacing: .12em; font-weight: 700; color: var(--faint);
+  text-transform: uppercase; border-bottom: 1px solid var(--line); }
+
+/* 6) SELECTED WORK — 卡片网格 */
+.ada-work { max-width: 880px; margin: 16px auto 0; padding: 0 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.ada-work .gh-card { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; margin: 0; }
+.ada-work .gh-card-image, .ada-work .gh-card-link { display: block; }
+.ada-work .gh-card-image img, .ada-work .gh-card img { width: 100%; height: 152px; object-fit: cover; display: block; }
+.ada-work .gh-card-content, .ada-work .gh-card-wrapper { padding: 14px; }
+.ada-work .gh-card-title { font-size: 1.05rem; line-height: 1.3; margin: 0 0 .35rem; }
+.ada-work .gh-card-excerpt { font-size: .9rem; color: var(--muted); line-height: 1.45; }
+
+/* 7) WRITING — 列表 */
+.ada-writing { max-width: 880px; margin: 6px auto 0; padding: 0 24px; }
+.ada-writing .gh-card { border: 0; border-bottom: 1px solid #f1f1ef; border-radius: 0; padding: 16px 0; margin: 0; background: transparent; }
+.ada-writing .gh-card-image { display: none; }
+.ada-writing .gh-card-title { font-size: 1.1rem; margin: 0 0 .3rem; }
+.ada-writing .gh-card-excerpt { font-size: .92rem; color: var(--muted); }
+
+/* 8) 文章 / 页面正文阅读宽 */
+.gh-content, .post-content, .gh-article .gh-content { max-width: 680px; margin-left: auto; margin-right: auto; }
+.gh-article-title, .article-title, .gh-article-header .gh-article-title { line-height: 1.2; }
+
+/* 9) 文章配图 */
+figure.kg-image-card img { border-radius: 8px; border: 1px solid var(--line); }
+figure.kg-image-card figcaption { font-size: .82rem; color: var(--faint); text-align: center; margin-top: 6px; }
+
+/* 10) 页脚 */
+.ada-foot { margin-top: 10px; font-size: .85rem; color: var(--faint); }
+.ada-foot a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 640px) {
+  .ada-work { grid-template-columns: 1fr; }
+  .ada-hero__title { font-size: 1.7rem; }
+}
+
+</style>
+
+</head>
+<body class="post-template tag-data-analytics has-sans-title has-sans-body">
+
+<div class="gh-viewport">
+    
+    <header id="gh-navigation" class="gh-navigation is-middle-logo gh-outer">
+    <div class="gh-navigation-inner gh-inner">
+
+        <div class="gh-navigation-brand">
+            <a class="gh-navigation-logo is-title" href="https://ada-okoro.github.io/ada-blog">
+                    Qian Li · Data &amp; Business Analyst
+            </a>
+            <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>            <button class="gh-burger gh-icon-button" aria-label="Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg>                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>            </button>
+        </div>
+
+        <nav class="gh-navigation-menu">
+            <ul class="nav">
+    <li class="nav-work"><a href="https://ada-okoro.github.io/ada-blog/">Work</a></li>
+    <li class="nav-writing"><a href="https://ada-okoro.github.io/ada-blog/#writing">Writing</a></li>
+    <li class="nav-about"><a href="https://ada-okoro.github.io/ada-blog/about/">About</a></li>
+</ul>
+
+        </nav>
+
+        <div class="gh-navigation-actions">
+                    <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>        </div>
+
+    </div>
+</header>
+
+    
+
+<main class="gh-main">
+
+    <article class="gh-article post tag-data-analytics featured">
+
+        <header class="gh-article-header gh-canvas">
+
+                <a class="gh-article-tag" href="https://ada-okoro.github.io/ada-blog/tag/data-analytics/">Data Analytics</a>
+            <h1 class="gh-article-title is-title">Does Weather Drive Retail Sales? Climate–Sales Correlation across AB, BC &amp; ON (2013–2022)</h1>
+                <p class="gh-article-excerpt is-body">A decade of data on how temperature and precipitation relate to retail sales — and what it means for forecasting.</p>
+
+                <div class="gh-meta-share">
+                    <div class="gh-article-meta">
+                        <div class="gh-article-author-image instapaper_ignore">
+                                    <a href="./../author/ada/"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg>
+</a>
+                        </div>
+                        <div class="gh-article-meta-wrapper">
+                            <h4 class="gh-article-author-name"><a href="./../author/ada/">Ada Okoro</a></h4>
+                            <div class="gh-article-meta-content">
+                                <time class="gh-article-meta-date" datetime="2026-06-27">27 Jun 2026</time>
+                                    <span class="gh-article-meta-length"><span class="bull">—</span> 3 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#/share" class="gh-button gh-button-share">
+                        Share
+                    </a>
+                </div>
+
+                <figure class="gh-article-image">
+        <img
+            srcset="./../content/images/size/w320/2026/06/dashboard-correlation-ab-1.png 320w,
+                    ./../content/images/size/w600/2026/06/dashboard-correlation-ab-1.png 600w,
+                    ./../content/images/size/w960/2026/06/dashboard-correlation-ab-1.png 960w,
+                    ./../content/images/size/w1200/2026/06/dashboard-correlation-ab-1.png 1200w,
+                    ./../content/images/size/w2000/2026/06/dashboard-correlation-ab-1.png 2000w"
+            sizes="(max-width: 1200px) 100vw, 1120px"
+            src="./../content/images/size/w1200/2026/06/dashboard-correlation-ab-1.png"
+            alt="Does Weather Drive Retail Sales? Climate–Sales Correlation across AB, BC &amp; ON (2013–2022)"
+        >
+    </figure>
+
+        </header>
+
+        <section class="gh-content gh-canvas is-body">
+            <p>Retailers plan inventory, staffing, and promotions months ahead — so it's worth asking how much the <em>weather</em> actually moves sales. In this project I analysed a decade of monthly data (2013–2022) to measure how temperature and precipitation relate to retail sales across <strong>Alberta, British Columbia, and Ontario</strong>, and what that means for forecasting.</p><h2 id="objective-approach">Objective &amp; approach</h2><p>The goal was to quantify how climate factors influence retail sales, and to translate that into inventory, marketing, and staffing guidance. I combined statistical correlation analysis with industry-level segmentation, supported by Tableau dashboards so both technical and non-technical stakeholders could read the story quickly.</p><h2 id="data-method">Data &amp; method</h2><ul><li><strong>Sources:</strong> Statistics Canada retail trade tables and Environment Canada historical climate records.</li><li><strong>Preparation:</strong> consolidated and harmonised climate datasets, standardised date formats, and organised retailers into <strong>11 industry categories</strong> for comparable segmentation.</li><li><strong>Smoothing:</strong> computed monthly averages to reduce short-term noise and surface underlying trends.</li><li><strong>Integrity:</strong> retained the small share of null values deliberately (negligible impact), and integrated everything by province, year, and month for reproducible analysis.</li><li><strong>Tooling:</strong> Tableau Prep flows for cleaning, Tableau for correlation and seasonality dashboards.</li></ul><figure class="kg-card kg-image-card kg-card-hascaption"><img src="./../content/images/2026/06/tableau-prep-flow-1.png" class="kg-image" alt="Tableau Prep flow" loading="lazy"><figcaption>Cleaning and shaping the climate &amp; retail data in Tableau Prep.</figcaption></figure><h2 id="key-findings">Key findings</h2><p><strong>1. Precipitation barely matters.</strong> Across all three provinces, precipitation showed negligible correlation with overall sales — fluctuating near zero historically and staying insignificant in forecasts (Ontario even leaned slightly negative). For most planning, it can be excluded from predictive models.</p><p><strong>2. Temperature is a small but consistent driver.</strong> Warmer quarters aligned with slightly higher demand in every province. The effect was most pronounced in Ontario, moderate in Alberta and BC, and expected to persist through 2023 — useful as a <em>secondary</em> seasonal adjustment, not a primary signal.</p><p><strong>3. Seasonality and promotions dominate.</strong> Recurring Q2–Q3 peaks and Q4 holiday lifts drove the bulk of variation, with climate playing a supporting role.</p><p><strong>4. Sensitivity varies a lot by industry.</strong> A few examples from the industry-level analysis:</p><ul><li><strong>High temperature-sensitivity:</strong> Building Materials &amp; Garden Equipment, Gasoline Stations, and Motor Vehicle &amp; Parts Dealers (e.g. BC Gasoline ≈ +0.38, Building Materials ≈ +0.34 with temperature).</li><li><strong>Precipitation-positive niches:</strong> Electronics &amp; Appliances (BC ≈ +0.38), Sporting Goods, and Health &amp; Personal Care (≈ +0.18–0.22) — wetter periods tracked higher demand. Ontario Building Materials stood out at ≈ +0.60 with precipitation.</li><li><strong>Neutral:</strong> Food &amp; Beverage and Clothing hovered near zero.</li><li><strong>Negative/negligible to temperature:</strong> Electronics &amp; Appliances (≈ –0.28) and Health &amp; Personal Care (≈ –0.22).</li></ul><h2 id="a-closer-look-by-province">A closer look by province</h2><p>Scale and climate differ across the three provinces, but the signal is consistent. British Columbia is the mildest and wettest (avg ~10.9°C, ~119&nbsp;mm precipitation), Alberta the coldest and driest (~1.2°C, ~28&nbsp;mm), and Ontario sits in between (~4.6°C, ~86&nbsp;mm) while being by far the largest retail market. Despite these differences, precipitation tracks near zero with sales in every province, while temperature shows a small positive correlation — strongest in Ontario. (Alberta's dashboard is shown at the top of this post.)</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="./../content/images/2026/06/dashboard-correlation-bc.png" class="kg-image" alt="British Columbia correlation dashboard" loading="lazy"><figcaption>British Columbia — precipitation vs. temperature correlation with sales.</figcaption></figure><figure class="kg-card kg-image-card kg-card-hascaption"><img src="./../content/images/2026/06/dashboard-correlation-on.png" class="kg-image" alt="Ontario correlation dashboard" loading="lazy"><figcaption>Ontario — precipitation vs. temperature correlation with sales.</figcaption></figure><figure class="kg-card kg-image-card kg-card-hascaption"><img src="./../content/images/2026/06/industry-correlations-ab-1.jpg" class="kg-image" alt="Industry correlation dashboard" loading="lazy"><figcaption>Industry-level temperature &amp; precipitation correlations (Alberta example).</figcaption></figure><h2 id="what-id-recommend">What I'd recommend</h2><ul><li>Incorporate <strong>temperature as a secondary regressor</strong> for climate-sensitive sectors; <strong>exclude precipitation</strong> from general models given its negligible predictive value.</li><li>Anchor planning to <strong>established seasonal peaks</strong> — e.g. Ontario ramping inventory in Q2–Q3, Alberta focusing on Building Materials and Gasoline Stations.</li><li>Keep <strong>contingency plans</strong> for extreme-weather demand spikes (heat waves), even though climate isn't a dominant driver overall.</li></ul><p>Full dataset, Tableau workbook, Tableau Prep flows, and the executive briefing report are on GitHub: <a href="https://github.com/Ada-Okoro/Climate-and-Sales-Correlation?ref=localhost">Climate-and-Sales-Correlation</a>.</p>
+        </section>
+
+    </article>
+
+        <div class="gh-comments gh-canvas">
+            
+        <script defer src="https://cdn.jsdelivr.net/ghost/comments-ui@~1.5/umd/comments-ui.min.js" data-locale="en" data-ghost-comments="https://ada-okoro.github.io/ada-blog/" data-api="https://ada-okoro.github.io/ada-blog/ghost/api/content/" data-admin="https://ada-okoro.github.io/ada-blog/ghost/" data-key="c365eb55b5ca3a11bc2bf6973a" data-title="null" data-count="true" data-post-id="6a4038861af5ca00017ebcc2" data-color-scheme="auto" data-avatar-saturation="60" data-accent-color="#0ABAB5" data-comments-enabled="all" data-publication="Qian Li · Data & Business Analyst" crossorigin="anonymous"></script>
+    
+        </div>
+
+</main>
+
+
+            <section class="gh-container is-grid gh-outer">
+                <div class="gh-container-inner gh-inner">
+                    <h2 class="gh-container-title">Read more</h2>
+                    <div class="gh-feed">
+                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="./../welcome/">
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Welcome — data, decisions, and a bit of weather</h3>
+                <p class="gh-card-excerpt is-body">What this blog is about, and what you&#x27;ll find here.</p>
+            <footer class="gh-card-meta">
+<!--
+             -->
+                    <span class="gh-card-author">By Ada Okoro</span>
+                    <time class="gh-card-date" datetime="2026-06-27">27 Jun 2026</time>
+                <!--
+         --></footer>
+        </div>
+    </a>
+</article>
+                            <article class="gh-card post featured">
+    <a class="gh-card-link" href="./../alberta-graduate-income/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="./../content/images/size/w160/format/webp/2026/06/notebook-income-filter.png 160w,
+                            ./../content/images/size/w320/format/webp/2026/06/notebook-income-filter.png 320w,
+                            ./../content/images/size/w600/format/webp/2026/06/notebook-income-filter.png 600w,
+                            ./../content/images/size/w960/format/webp/2026/06/notebook-income-filter.png 960w,
+                            ./../content/images/size/w1200/format/webp/2026/06/notebook-income-filter.png 1200w,
+                            ./../content/images/size/w2000/format/webp/2026/06/notebook-income-filter.png 2000w"
+                    sizes="320px"
+                    src="./../content/images/size/w600/2026/06/notebook-income-filter.png"
+                    alt="Cleaning &amp; Filtering Alberta Graduate Income Data with Python (pandas)"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Cleaning &amp; Filtering Alberta Graduate Income Data with Python (pandas)</h3>
+                <p class="gh-card-excerpt is-body">Turning a bulky Statistics Canada table into a focused, analysis-ready dataset.</p>
+            <footer class="gh-card-meta">
+<!--
+             -->
+                    <span class="gh-card-author">By Ada Okoro</span>
+                    <time class="gh-card-date" datetime="2026-06-27">27 Jun 2026</time>
+                <!--
+         --></footer>
+        </div>
+    </a>
+</article>
+                    </div>
+                </div>
+            </section>
+
+    
+    <footer class="gh-footer gh-outer">
+    <div class="gh-footer-inner gh-inner">
+
+
+        <div class="gh-social-links">
+        </div>
+
+        <div class="gh-footer-bar">
+            <span class="gh-footer-logo is-title">
+                    Qian Li · Data &amp; Business Analyst
+            </span>
+            <nav class="gh-footer-menu">
+                <ul class="nav">
+    <li class="nav-sign-up"><a href="#/portal/">Sign up</a></li>
+</ul>
+
+            </nav>
+            <div class="gh-footer-copyright">
+                Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+            </div>
+        </div>
+
+    </div>
+</footer>
+    
+</div>
+
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./../assets/built/source.js?v=39fb1568b4"></script>
+
+<script>
+/* ===== Qian Li blog — editorial hero + Selected work / Writing 分区 + footer =====
+   占位符由 scripts/personalize.py 替换。首页:文本 hero(无大头像)+ 按 slug 拆 Work/Writing。 */
+(function () {
+  var BIO = "PMP-certified analyst with 6+ years in business analysis & data analytics — helping teams make data-driven decisions. SQL · Power BI · Tableau.", GH = "https://github.com/Ada-Okoro", LI = "https://www.linkedin.com/in/qianli-cv/";
+  var FEATURED = ["weather-retail-sales", "alberta-graduate-income"]; // 精选项目 slug
+
+  function isHome() {
+    return document.body.classList.contains("home-template") ||
+           location.pathname.replace(/\/+$/, "") === "";
+  }
+  function label(t, id) {
+    var d = document.createElement("div");
+    d.className = "ada-section-label"; d.textContent = t; if (id) d.id = id;
+    return d;
+  }
+
+  function run() {
+    document.querySelectorAll(".gh-footer-signup,.gh-navigation-members,form[data-members-form]")
+      .forEach(function (e) { e.remove(); });
+
+    // 页脚版权 + 社交(所有页面)
+    var foot = document.querySelector(".gh-footer .gh-inner") || document.querySelector(".gh-footer");
+    if (foot && !foot.querySelector(".ada-foot")) {
+      var n = document.createElement("div");
+      n.className = "ada-foot";
+      n.innerHTML = "© " + new Date().getFullYear() + " Qian Li (Ada) · " +
+        '<a href="' + GH + '" target="_blank" rel="noopener">GitHub</a> · ' +
+        '<a href="' + LI + '" target="_blank" rel="noopener">LinkedIn</a>';
+      foot.appendChild(n);
+    }
+
+    if (!isHome() || document.querySelector(".ada-hero")) return;
+
+    var nav = document.getElementById("gh-navigation");
+    if (!nav || !nav.parentNode) return;
+    var parent = nav.parentNode;            // .gh-viewport — 在此层插入,与 .gh-inner 同级,避免双重内边距
+
+    // 文本 hero(无大头像;头像已在导航栏)
+    var hero = document.createElement("section");
+    hero.className = "ada-hero";
+    hero.innerHTML =
+      '<div class="ada-hero__eyebrow">Data &amp; Business Analyst · Calgary</div>' +
+      '<h1 class="ada-hero__title">Turning data into decisions.</h1>' +
+      '<p class="ada-hero__bio">' + BIO + '</p>' +
+      '<div class="ada-hero__links">' +
+        '<a class="primary" href="#work">View work ↓</a>' +
+        '<a href="' + GH + '" target="_blank" rel="noopener">GitHub</a>' +
+        '<a href="' + LI + '" target="_blank" rel="noopener">LinkedIn</a>' +
+      '</div>';
+
+    // 收集文章卡,按 slug 拆分
+    var cards = Array.prototype.slice.call(document.querySelectorAll(".gh-feed .gh-card"));
+    var frag = document.createDocumentFragment();
+    frag.appendChild(hero);
+
+    if (cards.length) {
+      var work = document.createElement("div"); work.className = "ada-work"; work.id = "work";
+      var writing = document.createElement("div"); writing.className = "ada-writing"; writing.id = "writing";
+      cards.forEach(function (c) {
+        var a = c.querySelector("a.gh-card-link, a[href]");
+        var href = a ? a.getAttribute("href") : "";
+        var feat = FEATURED.some(function (s) { return href.indexOf("/" + s + "/") >= 0; });
+        (feat ? work : writing).appendChild(c);
+      });
+      if (work.children.length) { frag.appendChild(label("Selected work")); frag.appendChild(work); }
+      if (writing.children.length) { frag.appendChild(label("Writing", "writing-label")); frag.appendChild(writing); }
+    }
+
+    parent.insertBefore(frag, nav.nextSibling);
+
+    // 移除原文章流容器(卡片已移走)
+    var container = document.querySelector(".gh-container.is-list") || document.querySelector(".gh-feed");
+    if (container) container.remove();
+  }
+
+  if (document.readyState !== "loading") run();
+  else document.addEventListener("DOMContentLoaded", run);
+})();
+
+</script>
+
+</body>
+</html>

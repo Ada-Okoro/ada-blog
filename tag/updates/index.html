@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Updates - Qian Li · Data &amp; Business Analyst</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preload" as="style" href="./../../assets/built/screen.css?v=39fb1568b4">
+    <link rel="preload" as="script" href="./../../assets/built/source.js?v=39fb1568b4">
+    
+    <link rel="preload" as="font" type="font/woff2" href="./../../assets/fonts/inter-roman.woff2?v=39fb1568b4" crossorigin="anonymous">
+<style>
+    @font-face {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: optional;
+        src: url(./../../assets/fonts/inter-roman.woff2?v=39fb1568b4) format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+</style>
+
+    <link rel="stylesheet" type="text/css" href="./../../assets/built/screen.css?v=39fb1568b4">
+
+    <style>
+        :root {
+            --background-color: #ffffff
+        }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast has been taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+
+        if (accentColor.length === 3) {
+            accentColor = accentColor[0] + accentColor[0] + accentColor[1] + accentColor[1] + accentColor[2] + accentColor[2];
+        }
+
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    <link rel="icon" href="https://ada-okoro.github.io/ada-blog/content/images/size/w256h256/2026/06/avatar-10.png" type="image/png">
+    <link rel="canonical" href="https://ada-okoro.github.io/ada-blog/tag/updates/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Qian Li · Data &amp; Business Analyst">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Updates - Qian Li · Data &amp; Business Analyst">
+    <meta property="og:url" content="https://ada-okoro.github.io/ada-blog/tag/updates/">
+    <meta property="og:image" content="https://static.ghost.org/v5.0.0/images/publication-cover.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Updates - Qian Li · Data &amp; Business Analyst">
+    <meta name="twitter:url" content="https://ada-okoro.github.io/ada-blog/tag/updates/">
+    <meta name="twitter:image" content="https://static.ghost.org/v5.0.0/images/publication-cover.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="840">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Series",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qian Li · Data &amp; Business Analyst",
+        "url": "https://ada-okoro.github.io/ada-blog/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://ada-okoro.github.io/ada-blog/content/images/size/w256h256/2026/06/avatar-10.png"
+        }
+    },
+    "url": "https://ada-okoro.github.io/ada-blog/tag/updates/",
+    "name": "Updates",
+    "mainEntityOfPage": "https://ada-okoro.github.io/ada-blog/tag/updates/"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 6.47">
+    <link rel="alternate" type="application/rss+xml" title="Qian Li · Data &amp; Business Analyst" href="https://ada-okoro.github.io/ada-blog/rss/">
+    
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.8/umd/sodo-search.min.js" data-key="c365eb55b5ca3a11bc2bf6973a" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.8/umd/main.css" data-sodo-search="https://ada-okoro.github.io/ada-blog/" data-locale="en" crossorigin="anonymous"></script>
+    
+    <link href="https://ada-okoro.github.io/ada-blog/webmentions/receive/" rel="webmention">
+    <script defer src="./../../public/cards.min.js?v=39fb1568b4"></script>
+    <link rel="stylesheet" type="text/css" href="./../../public/cards.min.css?v=39fb1568b4">
+    <script defer src="./../../public/comment-counts.min.js?v=39fb1568b4" data-ghost-comments-counts-api="https://ada-okoro.github.io/ada-blog/members/api/comments/counts/"></script><style>:root {--ghost-accent-color: #0ABAB5;}</style>
+    <style>
+/* ===== Qian Li · Data & Business Analyst — 编辑/极简 ===== */
+:root {
+  --accent:#0ABAB5; --ink:#1a1a1a; --muted:#5b6470; --faint:#9aa0a6;
+  --line:#ececea; --bg:#fafaf9;
+}
+
+/* 0) 底色:中性暖白(移除旧的满屏蓝/白卡那套) */
+body { background: var(--bg); color: var(--ink); }
+.gh-viewport { background: transparent; max-width: none; margin: 0; border-radius: 0; box-shadow: none; width: auto; }
+.gh-inner, .gh-viewport .gh-inner { max-width: 880px; }
+
+/* 1) 隐藏会员/订阅 + 静态站无效功能 */
+.gh-footer-signup, .gh-navigation-members, .nav-sign-up,
+form[data-members-form], .gh-comments, .gh-search { display: none !important; }
+body.home-template .gh-header { display: none !important; }
+
+/* 2) 顶栏头像(Tiffany 细描边,克制) */
+.gh-navigation-logo.is-title { display: inline-flex; align-items: center; gap: 10px; }
+.gh-navigation-logo.is-title::before {
+  content: ""; width: 30px; height: 30px; border-radius: 50%;
+  background: url("https://ada-okoro.github.io/ada-blog/content/images/2026/06/avatar-10.png") center/cover no-repeat; flex: none;
+  border: 1.5px solid var(--accent);
+}
+
+/* 3) Tiffany 作点缀:仅内容链接用强调色;标题/导航/卡片保持墨色,hover 才变蓝 */
+a { color: var(--accent); }
+.gh-navigation a { color: var(--ink); }
+.gh-navigation a:hover { color: var(--accent); }
+.gh-card-link, .gh-card-title, .gh-card-title a { color: var(--ink); }
+.gh-card:hover .gh-card-title { color: var(--accent); }
+
+/* 注入区块在 flex 列父级下需 width:100% 才能统一撑满再居中(否则缩成内容宽) */
+.ada-hero, .ada-section-label, .ada-work, .ada-writing { width: 100%; box-sizing: border-box; }
+
+/* 4) Hero(blog.js 生成) */
+.ada-hero { max-width: 880px; margin: 42px auto 6px; padding: 0 24px; }
+.ada-hero__eyebrow { font-size: .75rem; letter-spacing: .12em; font-weight: 700; color: var(--accent); text-transform: uppercase; }
+.ada-hero__title { font-size: 2.1rem; font-weight: 800; line-height: 1.15; margin: .4rem 0 .5rem; }
+.ada-hero__bio { font-size: 1.05rem; color: var(--muted); max-width: 62ch; line-height: 1.55; margin: 0 0 1.1rem; }
+.ada-hero__links a { display: inline-flex; align-items: center; padding: 8px 16px; border-radius: 8px;
+  font-size: .85rem; font-weight: 600; text-decoration: none; margin-right: 8px;
+  border: 1px solid #d8dcda; color: var(--muted); }
+.ada-hero__links a.primary { border-color: var(--accent); color: var(--accent); }
+
+/* 5) 区块标签 */
+.ada-section-label { max-width: 880px; margin: 34px auto 0; padding: 0 24px 8px;
+  font-size: .72rem; letter-spacing: .12em; font-weight: 700; color: var(--faint);
+  text-transform: uppercase; border-bottom: 1px solid var(--line); }
+
+/* 6) SELECTED WORK — 卡片网格 */
+.ada-work { max-width: 880px; margin: 16px auto 0; padding: 0 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.ada-work .gh-card { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; margin: 0; }
+.ada-work .gh-card-image, .ada-work .gh-card-link { display: block; }
+.ada-work .gh-card-image img, .ada-work .gh-card img { width: 100%; height: 152px; object-fit: cover; display: block; }
+.ada-work .gh-card-content, .ada-work .gh-card-wrapper { padding: 14px; }
+.ada-work .gh-card-title { font-size: 1.05rem; line-height: 1.3; margin: 0 0 .35rem; }
+.ada-work .gh-card-excerpt { font-size: .9rem; color: var(--muted); line-height: 1.45; }
+
+/* 7) WRITING — 列表 */
+.ada-writing { max-width: 880px; margin: 6px auto 0; padding: 0 24px; }
+.ada-writing .gh-card { border: 0; border-bottom: 1px solid #f1f1ef; border-radius: 0; padding: 16px 0; margin: 0; background: transparent; }
+.ada-writing .gh-card-image { display: none; }
+.ada-writing .gh-card-title { font-size: 1.1rem; margin: 0 0 .3rem; }
+.ada-writing .gh-card-excerpt { font-size: .92rem; color: var(--muted); }
+
+/* 8) 文章 / 页面正文阅读宽 */
+.gh-content, .post-content, .gh-article .gh-content { max-width: 680px; margin-left: auto; margin-right: auto; }
+.gh-article-title, .article-title, .gh-article-header .gh-article-title { line-height: 1.2; }
+
+/* 9) 文章配图 */
+figure.kg-image-card img { border-radius: 8px; border: 1px solid var(--line); }
+figure.kg-image-card figcaption { font-size: .82rem; color: var(--faint); text-align: center; margin-top: 6px; }
+
+/* 10) 页脚 */
+.ada-foot { margin-top: 10px; font-size: .85rem; color: var(--faint); }
+.ada-foot a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 640px) {
+  .ada-work { grid-template-columns: 1fr; }
+  .ada-hero__title { font-size: 1.7rem; }
+}
+
+</style>
+
+</head>
+<body class="tag-template tag-updates has-sans-title has-sans-body">
+
+<div class="gh-viewport">
+    
+    <header id="gh-navigation" class="gh-navigation is-middle-logo gh-outer">
+    <div class="gh-navigation-inner gh-inner">
+
+        <div class="gh-navigation-brand">
+            <a class="gh-navigation-logo is-title" href="https://ada-okoro.github.io/ada-blog">
+                    Qian Li · Data &amp; Business Analyst
+            </a>
+            <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>            <button class="gh-burger gh-icon-button" aria-label="Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg>                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>            </button>
+        </div>
+
+        <nav class="gh-navigation-menu">
+            <ul class="nav">
+    <li class="nav-work"><a href="https://ada-okoro.github.io/ada-blog/">Work</a></li>
+    <li class="nav-writing"><a href="https://ada-okoro.github.io/ada-blog/#writing">Writing</a></li>
+    <li class="nav-about"><a href="https://ada-okoro.github.io/ada-blog/about/">About</a></li>
+</ul>
+
+        </nav>
+
+        <div class="gh-navigation-actions">
+                    <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>        </div>
+
+    </div>
+</header>
+
+    
+<main class="gh-main gh-outer">
+
+        <section class="gh-archive gh-inner">
+            <div class="gh-archive-inner">
+                <header class="gh-archive-wrapper">
+                    <h1 class="gh-article-title is-title">Updates</h1>
+                </header>
+                            </div>
+        </section>
+
+    
+<section class="gh-container is-list gh-outer">
+    <div class="gh-container-inner gh-inner">
+        
+
+        <main class="gh-main">
+            <div class="gh-feed">
+
+
+
+                        <article class="gh-card post tag-updates no-image">
+    <a class="gh-card-link" href="./../../welcome/">
+        <div class="gh-card-wrapper">
+                <p class="gh-card-tag">Updates</p>
+            <h3 class="gh-card-title is-title">Welcome — data, decisions, and a bit of weather</h3>
+                <p class="gh-card-excerpt is-body">What this blog is about, and what you&#x27;ll find here.</p>
+            <footer class="gh-card-meta">
+<!--
+             -->
+                    <span class="gh-card-author">By Ada Okoro</span>
+                    <time class="gh-card-date" datetime="2026-06-27">27 Jun 2026</time>
+                <!--
+         --></footer>
+        </div>
+    </a>
+</article>
+
+            </div>
+
+        </main>
+
+
+    </div>
+</section>
+
+</main>
+    
+    <footer class="gh-footer gh-outer">
+    <div class="gh-footer-inner gh-inner">
+
+
+        <div class="gh-social-links">
+        </div>
+
+        <div class="gh-footer-bar">
+            <span class="gh-footer-logo is-title">
+                    Qian Li · Data &amp; Business Analyst
+            </span>
+            <nav class="gh-footer-menu">
+                <ul class="nav">
+    <li class="nav-sign-up"><a href="#/portal/">Sign up</a></li>
+</ul>
+
+            </nav>
+            <div class="gh-footer-copyright">
+                Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+            </div>
+        </div>
+
+    </div>
+</footer>
+    
+</div>
+
+
+<script src="./../../assets/built/source.js?v=39fb1568b4"></script>
+
+<script>
+/* ===== Qian Li blog — editorial hero + Selected work / Writing 分区 + footer =====
+   占位符由 scripts/personalize.py 替换。首页:文本 hero(无大头像)+ 按 slug 拆 Work/Writing。 */
+(function () {
+  var BIO = "PMP-certified analyst with 6+ years in business analysis & data analytics — helping teams make data-driven decisions. SQL · Power BI · Tableau.", GH = "https://github.com/Ada-Okoro", LI = "https://www.linkedin.com/in/qianli-cv/";
+  var FEATURED = ["weather-retail-sales", "alberta-graduate-income"]; // 精选项目 slug
+
+  function isHome() {
+    return document.body.classList.contains("home-template") ||
+           location.pathname.replace(/\/+$/, "") === "";
+  }
+  function label(t, id) {
+    var d = document.createElement("div");
+    d.className = "ada-section-label"; d.textContent = t; if (id) d.id = id;
+    return d;
+  }
+
+  function run() {
+    document.querySelectorAll(".gh-footer-signup,.gh-navigation-members,form[data-members-form]")
+      .forEach(function (e) { e.remove(); });
+
+    // 页脚版权 + 社交(所有页面)
+    var foot = document.querySelector(".gh-footer .gh-inner") || document.querySelector(".gh-footer");
+    if (foot && !foot.querySelector(".ada-foot")) {
+      var n = document.createElement("div");
+      n.className = "ada-foot";
+      n.innerHTML = "© " + new Date().getFullYear() + " Qian Li (Ada) · " +
+        '<a href="' + GH + '" target="_blank" rel="noopener">GitHub</a> · ' +
+        '<a href="' + LI + '" target="_blank" rel="noopener">LinkedIn</a>';
+      foot.appendChild(n);
+    }
+
+    if (!isHome() || document.querySelector(".ada-hero")) return;
+
+    var nav = document.getElementById("gh-navigation");
+    if (!nav || !nav.parentNode) return;
+    var parent = nav.parentNode;            // .gh-viewport — 在此层插入,与 .gh-inner 同级,避免双重内边距
+
+    // 文本 hero(无大头像;头像已在导航栏)
+    var hero = document.createElement("section");
+    hero.className = "ada-hero";
+    hero.innerHTML =
+      '<div class="ada-hero__eyebrow">Data &amp; Business Analyst · Calgary</div>' +
+      '<h1 class="ada-hero__title">Turning data into decisions.</h1>' +
+      '<p class="ada-hero__bio">' + BIO + '</p>' +
+      '<div class="ada-hero__links">' +
+        '<a class="primary" href="#work">View work ↓</a>' +
+        '<a href="' + GH + '" target="_blank" rel="noopener">GitHub</a>' +
+        '<a href="' + LI + '" target="_blank" rel="noopener">LinkedIn</a>' +
+      '</div>';
+
+    // 收集文章卡,按 slug 拆分
+    var cards = Array.prototype.slice.call(document.querySelectorAll(".gh-feed .gh-card"));
+    var frag = document.createDocumentFragment();
+    frag.appendChild(hero);
+
+    if (cards.length) {
+      var work = document.createElement("div"); work.className = "ada-work"; work.id = "work";
+      var writing = document.createElement("div"); writing.className = "ada-writing"; writing.id = "writing";
+      cards.forEach(function (c) {
+        var a = c.querySelector("a.gh-card-link, a[href]");
+        var href = a ? a.getAttribute("href") : "";
+        var feat = FEATURED.some(function (s) { return href.indexOf("/" + s + "/") >= 0; });
+        (feat ? work : writing).appendChild(c);
+      });
+      if (work.children.length) { frag.appendChild(label("Selected work")); frag.appendChild(work); }
+      if (writing.children.length) { frag.appendChild(label("Writing", "writing-label")); frag.appendChild(writing); }
+    }
+
+    parent.insertBefore(frag, nav.nextSibling);
+
+    // 移除原文章流容器(卡片已移走)
+    var container = document.querySelector(".gh-container.is-list") || document.querySelector(".gh-feed");
+    if (container) container.remove();
+  }
+
+  if (document.readyState !== "loading") run();
+  else document.addEventListener("DOMContentLoaded", run);
+})();
+
+</script>
+
+</body>
+</html>
