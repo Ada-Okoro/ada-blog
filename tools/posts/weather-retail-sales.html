@@ -1,0 +1,37 @@
+<p>Retailers plan inventory, staffing, and promotions months ahead — so it's worth asking how much the <em>weather</em> actually moves sales. In this project I analysed a decade of monthly data (2013–2022) to measure how temperature and precipitation relate to retail sales across <strong>Alberta, British Columbia, and Ontario</strong>, and what that means for forecasting.</p>
+
+<h2>Objective &amp; approach</h2>
+<p>The goal was to quantify how climate factors influence retail sales, and to translate that into inventory, marketing, and staffing guidance. I combined statistical correlation analysis with industry-level segmentation, supported by Tableau dashboards so both technical and non-technical stakeholders could read the story quickly.</p>
+
+<h2>Data &amp; method</h2>
+<ul>
+  <li><strong>Sources:</strong> Statistics Canada retail trade tables and Environment Canada historical climate records.</li>
+  <li><strong>Preparation:</strong> consolidated and harmonised climate datasets, standardised date formats, and organised retailers into <strong>11 industry categories</strong> for comparable segmentation.</li>
+  <li><strong>Smoothing:</strong> computed monthly averages to reduce short-term noise and surface underlying trends.</li>
+  <li><strong>Integrity:</strong> retained the small share of null values deliberately (negligible impact), and integrated everything by province, year, and month for reproducible analysis.</li>
+  <li><strong>Tooling:</strong> Tableau Prep flows for cleaning, Tableau for correlation and seasonality dashboards.</li>
+</ul>
+
+<h2>Key findings</h2>
+<p><strong>1. Precipitation barely matters.</strong> Across all three provinces, precipitation showed negligible correlation with overall sales — fluctuating near zero historically and staying insignificant in forecasts (Ontario even leaned slightly negative). For most planning, it can be excluded from predictive models.</p>
+
+<p><strong>2. Temperature is a small but consistent driver.</strong> Warmer quarters aligned with slightly higher demand in every province. The effect was most pronounced in Ontario, moderate in Alberta and BC, and expected to persist through 2023 — useful as a <em>secondary</em> seasonal adjustment, not a primary signal.</p>
+
+<p><strong>3. Seasonality and promotions dominate.</strong> Recurring Q2–Q3 peaks and Q4 holiday lifts drove the bulk of variation, with climate playing a supporting role.</p>
+
+<p><strong>4. Sensitivity varies a lot by industry.</strong> A few examples from the industry-level analysis:</p>
+<ul>
+  <li><strong>High temperature-sensitivity:</strong> Building Materials &amp; Garden Equipment, Gasoline Stations, and Motor Vehicle &amp; Parts Dealers (e.g. BC Gasoline ≈ +0.38, Building Materials ≈ +0.34 with temperature).</li>
+  <li><strong>Precipitation-positive niches:</strong> Electronics &amp; Appliances (BC ≈ +0.38), Sporting Goods, and Health &amp; Personal Care (≈ +0.18–0.22) — wetter periods tracked higher demand. Ontario Building Materials stood out at ≈ +0.60 with precipitation.</li>
+  <li><strong>Neutral:</strong> Food &amp; Beverage and Clothing hovered near zero.</li>
+  <li><strong>Negative/negligible to temperature:</strong> Electronics &amp; Appliances (≈ –0.28) and Health &amp; Personal Care (≈ –0.22).</li>
+</ul>
+
+<h2>What I'd recommend</h2>
+<ul>
+  <li>Incorporate <strong>temperature as a secondary regressor</strong> for climate-sensitive sectors; <strong>exclude precipitation</strong> from general models given its negligible predictive value.</li>
+  <li>Anchor planning to <strong>established seasonal peaks</strong> — e.g. Ontario ramping inventory in Q2–Q3, Alberta focusing on Building Materials and Gasoline Stations.</li>
+  <li>Keep <strong>contingency plans</strong> for extreme-weather demand spikes (heat waves), even though climate isn't a dominant driver overall.</li>
+</ul>
+
+<p>Full dataset, Tableau workbook, Tableau Prep flows, and the executive briefing report are on GitHub: <a href="https://github.com/Ada-Okoro/Climate-and-Sales-Correlation">Climate-and-Sales-Correlation</a>.</p>

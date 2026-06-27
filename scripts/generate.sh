@@ -8,7 +8,8 @@
 #       -> gssg --url https://blog.example.com(根路径,无需 subDir)
 set -euo pipefail
 cd "$(dirname "$0")/.."
-mkdir -p static
+# 干净构建:清空旧产物,避免已删除的文章/页面在 static 里残留(gssg 镜像不会删旧文件)
+rm -rf static && mkdir -p static
 
 PAGES_URL="$(grep -E '^PAGES_URL=' .env | head -1 | cut -d= -f2-)"
 [ -n "$PAGES_URL" ] || { echo "ERROR: PAGES_URL not set in .env" >&2; exit 1; }

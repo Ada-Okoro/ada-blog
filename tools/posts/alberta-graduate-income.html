@@ -1,0 +1,20 @@
+<p>Public datasets from Statistics Canada are rich — and often unwieldy. A single table can carry dozens of administrative columns and hundreds of thousands of rows covering every province, demographic, and metric. This short project shows how I turned one such table into a focused, analysis-ready slice using Python and pandas.</p>
+
+<h2>The goal</h2>
+<p>Extract the <strong>median employment income of Alberta graduates</strong> — measured <strong>two and five years after graduation</strong> — and break it down by the dimensions that matter for comparison: <strong>gender</strong>, <strong>age group</strong>, and <strong>student status</strong> (Canadian vs. international students).</p>
+
+<h2>The data</h2>
+<p>The source was Statistics Canada table <code>37100283</code> (graduate outcomes / employment income). Out of the box it includes many fields that don't help analysis — DGUIDs, vectors, coordinates, scalar factors, status flags, and more.</p>
+
+<h2>The approach (pandas)</h2>
+<ol>
+  <li><strong>Trim the noise:</strong> dropped administrative columns (<code>DGUID</code>, <code>VECTOR</code>, <code>COORDINATE</code>, <code>SCALAR_FACTOR</code>, <code>SYMBOL</code>, <code>STATUS</code>, and similar) to keep only analytically meaningful fields.</li>
+  <li><strong>Normalise dates:</strong> parsed <code>REF_DATE</code> into proper datetime values and derived a clean reference year.</li>
+  <li><strong>Filter deliberately:</strong> kept <code>GEO = Alberta</code> and graduates reporting employment income, then segmented by gender (Woman / Man), age group (15–34, 35–64), and status (Canadian / International), for the median-income-2-years and 5-years-after-graduation metrics.</li>
+  <li><strong>Export:</strong> wrote the result to <code>filtered_alberta_income.csv</code> (UTF-8) — a compact, ready-to-visualise dataset.</li>
+</ol>
+
+<h2>Why it matters</h2>
+<p>Most of the value in analytics happens before the chart: choosing the right slice, keeping the data honest, and producing something a stakeholder can use immediately. This filter turns an unwieldy national table into a clean Alberta-specific view of graduate earnings that's easy to chart and compare.</p>
+
+<p>The notebook (runnable in Colab) is on GitHub: <a href="https://github.com/Ada-Okoro/Climate-and-Sales-Correlation/blob/main/median_income_Filter.ipynb">median_income_Filter.ipynb</a>.</p>
