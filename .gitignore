@@ -1,0 +1,15 @@
+# secrets
+.env
+
+# Ghost content (themes/images/data live here at runtime)
+/content/*
+!/content/.gitkeep
+
+# backups
+/backups/*
+!/backups/.gitkeep
+
+# ops python venv
+/.ops-venv/
+__pycache__/
+*.pyc
