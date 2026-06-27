@@ -27,6 +27,8 @@ services:
         condition: service_healthy
     environment:
       NODE_ENV: production
+      # 关闭新设备邮箱验证码(本地无 SMTP,否则登录会因发信失败而 500)
+      security__staffDeviceVerification: "false"
       database__client: mysql
       database__connection__host: db
       database__connection__port: "3306"
