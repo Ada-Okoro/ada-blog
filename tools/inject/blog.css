@@ -49,3 +49,16 @@ body.home-template .gh-header { display: none !important; }
 /* 6) 文章配图与说明 */
 figure.kg-image-card img { border-radius: 8px; border: 1px solid rgba(0,0,0,.06); }
 figure.kg-image-card figcaption { font-size: .82rem; color: #8a929c; text-align: center; margin-top: 6px; }
+
+/* 7) Tiffany Blue 页面背景 + 白色内容卡(礼盒观感,正文仍在白底上) */
+body { background: #0ABAB5; }
+.gh-viewport {
+  background: #fff;
+  width: calc(100% - 36px);
+  max-width: 1100px;
+  margin: 26px auto;
+  border-radius: 16px;
+  box-shadow: 0 14px 50px rgba(0,0,0,.20);
+  padding-bottom: 10px;
+}
+.gh-viewport .gh-inner { max-width: 940px; }
